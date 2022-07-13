@@ -5,7 +5,6 @@ public class Sala {
 	public String inicio;
 	public String fim;
 	public double preco = 10.00;
-	public int horario;
 	
 	//Organização dos assentos no cinema
 	public int largura = 18;
@@ -18,7 +17,6 @@ public class Sala {
 	
 	//Cria a sala com valores pré-determinados
 	public Sala() {
-		// comentario de teste
 		this.ocupados = new boolean[this.profundidade][this.largura];
 		for(int i = 0; i < this.profundidade; ++i) {
 			for(int j = 0; j < this.largura; ++j) {
