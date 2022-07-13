@@ -1,15 +1,18 @@
 public class Sala {
-	//Inicializa as variáveis
+	//Dados da sessão
 	public int preco;
 	public int horario;
+	
+	//Organização dos assentos no cinema
 	public int largura = 18;
 	public int profundidade = 10;
 	public boolean[][] ocupados;
-	public int nComprados = 0;
-	public int[] comprados = new int[this.largura * this.profundidade];
-	public int nCorredores;
-	public int[] corredores;
+
+	//Determina os corredores
+	public int nCorredores; //Nº de corredores + 1
+	public int[] corredores; //Quantidade de cadeiras entre os corredores e as paredes do cinema
 	
+	//Cria a sala com valores pré-determinados
 	public Sala() {
 		this.ocupados = new boolean[this.profundidade][this.largura];
 		for(int i = 0; i < this.profundidade; ++i) {
@@ -21,6 +24,7 @@ public class Sala {
 		corredores =new int[] {largura};
 	}
 	
+	//Cria a sala com dimensões desejadas
 	public Sala(int largura, int profundidade) {
 		this.largura = largura;
 		this.profundidade = profundidade;
@@ -35,6 +39,7 @@ public class Sala {
 		corredores =new int[] {largura};
 	}
 	
+	//Cria a sala com assentos já ocupados
 	public Sala(int nOcupados, int[] ocupados) {
 		this.ocupados = new boolean[this.profundidade][this.largura];
 		for(int i = 0; i < this.profundidade; ++i) {
@@ -50,6 +55,7 @@ public class Sala {
 		corredores =new int[] {largura};
 	}
 	
+	//Cria a sala com assentos já ocupados e dimensões desejadas
 	public Sala(int largura, int profundidade, int nOcupados, int[] ocupados) {
 		this.largura = largura;
 		this.profundidade = profundidade;
@@ -68,6 +74,7 @@ public class Sala {
 		corredores = new int[] {largura};
 	}
 	
+	//Determina as posições dos corredores
 	public void criaCorredores(int _nCorredores, int[] _corredores) {
 		if(_nCorredores <= largura+1) {
 			int total = 0;
@@ -80,34 +87,11 @@ public class Sala {
 			}
 		}
 	}
-
-	public void adicionar(int acento) {
-		this.comprados[this.nComprados] = acento;
-		++this.nComprados;
-	}
 	
-	public void remover(int acento) {
-		int i;
-		boolean achou = false;
-		for(i = 0; i < this.nComprados; ++i) {
-			if(this.comprados[i] == acento) {
-				achou = true;
-				break;
-			}
+	//Finaliza a compra e atualiza os assentos ocupados da sala
+	public void comprar(int nComprados, int[] comprados) {
+		for(int i = 0; i < nComprados; ++i) {
+			this.ocupados[comprados[i]/this.largura][comprados[i]%this.largura] = true;
 		}
-		
-		if(achou) {
-			for(++i; i < this.nComprados; ++i) {
-				this.comprados[i-1] = this.comprados[i];
-			}
-			--this.nComprados;
-		}
-	}
-	
-	public void comprar() {
-		for(int i = 0; i < this.nComprados; ++i) {
-			this.ocupados[this.comprados[i]/this.largura][this.comprados[i]%this.largura] = true;
-		}
-		this.nComprados = 0;
 	}
 }
