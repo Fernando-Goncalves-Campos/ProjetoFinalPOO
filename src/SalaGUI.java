@@ -149,13 +149,12 @@ public class SalaGUI extends JFrame implements ActionListener{
 		jp.add(botoes);
 	}
 	
-	//Executa as ações dos botões e caixas de checagem
+	//Executa as ações dos botões
 	@Override
-	public void actionPerformed(ActionEvent e) {
+ 	public void actionPerformed(ActionEvent e) {
 		//Caso seja pressionado o botão "Comprar"
 		if("confirma".equals(e.getActionCommand())) {
-			
-			//Percorre todas as linhas
+			nComprados = 0;
 			for(int i = 0; i < sala.profundidade; ++i) {
 				
 				//Percorre todos os assentos de uma fileira
@@ -167,15 +166,32 @@ public class SalaGUI extends JFrame implements ActionListener{
 						//Adiciona o botão à lista de compras
 						comprados[nComprados] = (i * sala.largura) + j;
 						++nComprados;
-						opcoes[i][j].setSelected(false);
-						opcoes[i][j].setEnabled(false);
 					}
 				}
 			}
-			
 			//Caso o número de assentos desejados seja maior que 0
 			if(nComprados > 0) {
+				//Inicializa a aba de pagamento
+				CompraGUI pagamento = new CompraGUI(this, sala.preco, nComprados, comprados);
+				pagamento.getContentPane().setBackground(new Color(43, 43, 43));
+				pagamento.setSize(500,500);
+				pagamento.setVisible(true);
+				pagamento.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				
+				//Atualiza os dados da sala, caso seja neceessário
+				if(pagamento.pago) {
+					for(int i = 0; i < nComprados; ++i) {
+						int linha = comprados[i]/sala.largura;
+						int fileira = comprados[i]%sala.largura;
+						
+						opcoes[linha][fileira].setSelected(false);
+						opcoes[linha][fileira].setEnabled(false);
+						sala.ocupados[linha][fileira] = true;
+					}
+				}
+				
+				//Atualiza o número de assentos a serem comprados
+				nComprados = 0;
 			}
 		}
 		

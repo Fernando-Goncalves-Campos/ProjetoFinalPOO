@@ -1,11 +1,11 @@
 public class Sala {
 	//Dados da sessão
-	public int preco;
+	public double preco = 10.00;
 	public int horario;
 	
 	//Organização dos assentos no cinema
 	public int largura = 18;
-	public int profundidade = 10;
+	public int profundidade = 13;
 	public boolean[][] ocupados;
 
 	//Determina os corredores
