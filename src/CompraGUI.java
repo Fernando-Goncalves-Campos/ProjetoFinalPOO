@@ -6,8 +6,8 @@ public class CompraGUI extends JDialog implements ActionListener{
 	//Salva o frame que abriu a caixa de diálogo
 	private JFrame seletor;
 	
-	//Salva o preçpo de um assento
-	private double preco;
+	//Salva as informações da sessão
+	private Sala sala;
 	
 	//Salva os assentos desejados
 	private int nComprados;
@@ -17,10 +17,10 @@ public class CompraGUI extends JDialog implements ActionListener{
 	public boolean pago = false;
 	
 	
-	public CompraGUI(JFrame _seletor, double _preco, int _nComprados, int[] _comprados) {
+	public CompraGUI(JFrame _seletor, Sala _sala, int _nComprados, int[] _comprados) {
 		super(_seletor, true);
 		seletor = _seletor;
-		preco = _preco;
+		sala = _sala;
 		nComprados = _nComprados;
 		comprados = _comprados;
 		
@@ -28,9 +28,35 @@ public class CompraGUI extends JDialog implements ActionListener{
 		JPanel jp = (JPanel) getContentPane();
 		jp.setLayout(new FlowLayout());
 		
-		//Adiciona o preço dos ingressos
-		JLabel valor = new JLabel(String.format("R$%.2f", preco * nComprados));
-		this.add(valor);
+		//===========================Adiciona as formas de pagamento===========================
+		//---------Inicializa o painel---------
+		JPanel formas = new JPanel(new FlowLayout());
+		
+		//---------Adiciona o título---------
+		formas.add(new JLabel("Formas de pagamento:"));
+		formas.add(new JLabel("Não há formas de pagamento disponíveis, mas você pode imaginar que elas existem"));
+		jp.add(formas);
+		
+		//===========================Adiciona os dados dos ingressos===========================
+		//---------Inicializa o grid---------
+		JPanel dados = new JPanel(new GridLayout(5, 1));
+		dados.add(new JLabel(String.format("Filme: %s", sala.nomeDoFilme)));
+		dados.add(new JLabel(String.format("Sala: %d", sala.numeroDaSala)));
+		dados.add(new JLabel(String.format("Horário: %s-%s", sala.inicio, sala.fim)));
+		
+		//---------Adiciona os assentos---------
+		JPanel ingressos = new JPanel(new FlowLayout());
+		ingressos.add(new JLabel("Assentos:"));
+		for(int i = 0; i < nComprados; ++i) {
+			ingressos.add(new JLabel(String.format(" %d%c", (comprados[i]/sala.largura)+1, (char)(65 + (comprados[i]%sala.largura)))));
+		}
+		dados.add(ingressos);
+		
+		//---------Adiciona o preco---------
+		dados.add(new JLabel(String.format("R$%.2f", nComprados * sala.preco)));
+		
+		//---------Adiciona os dados no painel---------
+		jp.add(dados);
 		
 		//===========================Adiciona os botões================================
 		//Inicializa o painel onde os botões serão colocados

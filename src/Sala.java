@@ -1,5 +1,9 @@
 public class Sala {
 	//Dados da sessão
+	public String nomeDoFilme;
+	public int numeroDaSala;
+	public String inicio;
+	public String fim;
 	public double preco = 10.00;
 	public int horario;
 	

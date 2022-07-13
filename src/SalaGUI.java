@@ -189,9 +189,9 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 			//Caso o número de assentos desejados seja maior que 0
 			if(nComprados > 0) {
 				//Inicializa a aba de pagamento
-				CompraGUI pagamento = new CompraGUI(this, sala.preco, nComprados, comprados);
+				CompraGUI pagamento = new CompraGUI(this, sala, nComprados, comprados);
 				pagamento.getContentPane().setBackground(new Color(43, 43, 43));
-				pagamento.setSize(500,500);
+				pagamento.setSize(750, 500);
 				pagamento.setVisible(true);
 				pagamento.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				
@@ -209,8 +209,10 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 				}
 				
 				//Atualiza o número de assentos a serem comprados
-				nComprados = 0;
-				valor.setText("R$0.00");
+				if(pagamento.pago) {
+					nComprados = 0;
+					valor.setText("R$0.00");
+				}
 			}
 		}
 		
