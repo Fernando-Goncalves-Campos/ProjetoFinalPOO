@@ -24,6 +24,14 @@ public class CompraGUI extends JDialog implements ActionListener{
 		nComprados = _nComprados;
 		comprados = _comprados;
 		
+		//Inicializa o painel
+		JPanel jp = (JPanel) getContentPane();
+		jp.setLayout(new FlowLayout());
+		
+		//Adiciona o preço dos ingressos
+		JLabel valor = new JLabel(String.format("R$%.2f", preco * nComprados));
+		this.add(valor);
+		
 		//===========================Adiciona os botões================================
 		//Inicializa o painel onde os botões serão colocados
 		this.getContentPane().setLayout(new FlowLayout());

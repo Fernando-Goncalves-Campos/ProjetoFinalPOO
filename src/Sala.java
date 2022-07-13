@@ -21,7 +21,7 @@ public class Sala {
 			}
 		}
 		nCorredores = 1;
-		corredores =new int[] {largura};
+		corredores = new int[] {largura};
 	}
 	
 	//Cria a sala com dimensões desejadas
@@ -36,7 +36,7 @@ public class Sala {
 			}
 		}
 		nCorredores = 1;
-		corredores =new int[] {largura};
+		corredores = new int[] {largura};
 	}
 	
 	//Cria a sala com assentos já ocupados
@@ -52,7 +52,7 @@ public class Sala {
 			this.ocupados[ocupados[i]/this.largura][ocupados[i]%this.largura] = true;
 		}
 		nCorredores = 1;
-		corredores =new int[] {largura};
+		corredores = new int[] {largura};
 	}
 	
 	//Cria a sala com assentos já ocupados e dimensões desejadas

@@ -2,9 +2,10 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class SalaGUI extends JFrame implements ActionListener{
+public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 	//Salva os assentos selecionados
 	private JCheckBox[][] opcoes;
+	private JLabel valor = new JLabel("R$0.00");
 	
 	//Lista de assentos desejados pelo usuário
 	private int nComprados = 0;
@@ -86,6 +87,9 @@ public class SalaGUI extends JFrame implements ActionListener{
 					if(sala.ocupados[i-1][contador]) {
 						botao.setEnabled(false);
 					}
+					else {
+						botao.addItemListener(this);
+					}
 					
 					//Adiciona os assento ao frame
 					assentos.add(botao);
@@ -111,9 +115,14 @@ public class SalaGUI extends JFrame implements ActionListener{
 		//---------Adiciona os assentos no frame---------
 		jp.add(assentos);
 		
+		
+		//===========================Adiciona o preço dos ingressos===========================
+		JPanel dados = new JPanel(new GridLayout(2,1));
+		dados.add(valor);
+		
 		//===========================Adiciona os botões================================
 		//Inicializa o painel onde os botões serão colocados
-		JPanel botoes = new JPanel(new GridLayout(2,1));
+		JPanel botoes = new JPanel(new GridLayout(1,2));
 		
 		//---------Adiciona o botão de compra---------
 		//Inicializa o botão
@@ -146,7 +155,29 @@ public class SalaGUI extends JFrame implements ActionListener{
 		botoes.add(botaoRet);
 		
 		//---------Adiciona os botões no frame---------
-		jp.add(botoes);
+		dados.add(botoes);
+		jp.add(dados);
+	}
+	
+	//Executa as ações das caixas de checagem
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		nComprados = 0;
+		for(int i = 0; i < sala.profundidade; ++i) {
+			
+			//Percorre todos os assentos de uma fileira
+			for(int j = 0; j < sala.largura; ++j) {
+				
+				//Caso o assento tenha sido selecionado
+				if(opcoes[i][j].isSelected()) {
+					
+					//Adiciona o botão à lista de compras
+					comprados[nComprados] = (i * sala.largura) + j;
+					++nComprados;
+				}
+			}
+		}
+		valor.setText(String.format("R$%.2f", nComprados * sala.preco));
 	}
 	
 	//Executa as ações dos botões
@@ -154,21 +185,7 @@ public class SalaGUI extends JFrame implements ActionListener{
  	public void actionPerformed(ActionEvent e) {
 		//Caso seja pressionado o botão "Comprar"
 		if("confirma".equals(e.getActionCommand())) {
-			nComprados = 0;
-			for(int i = 0; i < sala.profundidade; ++i) {
-				
-				//Percorre todos os assentos de uma fileira
-				for(int j = 0; j < sala.largura; ++j) {
-					
-					//Caso o assento tenha sido selecionado
-					if(opcoes[i][j].isSelected()) {
-						
-						//Adiciona o botão à lista de compras
-						comprados[nComprados] = (i * sala.largura) + j;
-						++nComprados;
-					}
-				}
-			}
+			
 			//Caso o número de assentos desejados seja maior que 0
 			if(nComprados > 0) {
 				//Inicializa a aba de pagamento
@@ -184,6 +201,7 @@ public class SalaGUI extends JFrame implements ActionListener{
 						int linha = comprados[i]/sala.largura;
 						int fileira = comprados[i]%sala.largura;
 						
+						opcoes[linha][fileira].removeItemListener(this);
 						opcoes[linha][fileira].setSelected(false);
 						opcoes[linha][fileira].setEnabled(false);
 						sala.ocupados[linha][fileira] = true;
@@ -192,6 +210,7 @@ public class SalaGUI extends JFrame implements ActionListener{
 				
 				//Atualiza o número de assentos a serem comprados
 				nComprados = 0;
+				valor.setText("R$0.00");
 			}
 		}
 		
@@ -202,7 +221,6 @@ public class SalaGUI extends JFrame implements ActionListener{
 		}
 	}
 
-	//Função de teste
 	//Função de teste
 	public static void main(String[] args) {
 		Sala sala = new Sala();
