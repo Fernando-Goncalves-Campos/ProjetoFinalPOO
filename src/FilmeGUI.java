@@ -40,29 +40,19 @@ public class FilmeGUI extends JFrame implements ActionListener {
 			botoes[i].setBorder(null);
 		}
 		jp.add(horarios);
-		
-		//Adiciona o botão voltar
-		JButton voltar = new JButton("Voltar");
-		voltar.addActionListener(this);
-		voltar.setActionCommand("voltar");
 	}
 	
 	//Executa as ações dos botões
 	public void actionPerformed(ActionEvent e) {
-		if("voltar".equals(e.getActionCommand())) {
-			this.dispose();
-		}
-		else {
-			for(int i = 0; i < filme.nSalas; ++i) {
-				String mensagem = String.format("%d", i);
-				if(mensagem.equals(e.getActionCommand())) {
-					SalaGUI frame = new SalaGUI(filme.salas[i]);
-					frame.setSize(1920,1080);
-					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-					frame.getContentPane().setBackground(new Color(43, 43, 43));
-					frame.setVisible(true);
-					break;
-				}
+		for(int i = 0; i < filme.nSalas; ++i) {
+			String mensagem = String.format("%d", i);
+			if(mensagem.equals(e.getActionCommand())) {
+				SalaGUI frame = new SalaGUI(filme.salas[i]);
+				frame.setSize(1920,1080);
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.getContentPane().setBackground(new Color(43, 43, 43));
+				frame.setVisible(true);
+				break;
 			}
 		}
 	}
