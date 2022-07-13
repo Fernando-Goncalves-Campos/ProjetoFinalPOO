@@ -76,13 +76,19 @@ public class SalaGUI extends JFrame implements ActionListener{
 		JButton botaoRet = new JButton("Retornar");
 		botaoRet.addActionListener(this);
 		botaoRet.setActionCommand("retorna");
+		botaoRet.setFont(new Font("Arial", Font.BOLD, 18));
+		botaoRet.setBorder(null); 
+		botaoRet.setBackground(new Color(43, 43 ,43));
+		botaoRet.setForeground(new Color(169, 183, 198));
 		JButton botaoComprar = new JButton("Comprar");
 		botaoComprar.addActionListener(this);
 		botaoComprar.setActionCommand("confirma");
-		botaoComprar.setBorder(BorderFactory.createLineBorder(new Color(169, 183,198), 1)); 
+		botaoComprar.setFont(new Font("Arial", Font.BOLD, 18));
+		botaoComprar.setBorder(null); 
 		botaoComprar.setBackground(new Color(43, 43 ,43));
 		botaoComprar.setForeground(new Color(169, 183, 198));
-		botaoComprar.setOpaque(true);	botoes.add(botaoComprar);
+		botaoComprar.setOpaque(true);
+		botoes.add(botaoComprar);
 		botoes.add(botaoRet);
 		jp.add(botoes);
 	}
