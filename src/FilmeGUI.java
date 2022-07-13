@@ -16,20 +16,28 @@ public class FilmeGUI extends JFrame implements ActionListener {
 		jp.setLayout(new FlowLayout());
 		
 		//Adiciona o nome do filme
-		jp.add(new JLabel(filme.nomeDoFilme));
-		jp.add(new JLabel(String.format("R$%.2f", filme.preco)));
+		JLabel nome = new JLabel(filme.nomeDoFilme);
+		nome.setForeground(new Color(169, 183, 198));
+		jp.add(nome);
+		JLabel preco = new JLabel(String.format("R$%.2f", filme.preco));
+		preco.setForeground(new Color(169, 183, 198));
+		jp.add(preco);
 		
 		//Inicializa o grid para posicionar os botões
 		JPanel horarios = new JPanel();
-		horarios.setLayout(new GridLayout(filme.nSalas, 2));
+		horarios.setLayout(new GridLayout(filme.nSalas, 1));
+		horarios.setBorder(null);
+		horarios.setBackground(new Color(43, 43, 43));
 		
 		//Adiciona os horários
 		for(int i = 0; i < filme.nSalas; ++i) {
-			botoes[i] = new JButton();
+			botoes[i] = new JButton(String.format("%s-%s", filme.salas[i].inicio, filme.salas[i].fim));
 			horarios.add(botoes[i]);
 			botoes[i].addActionListener(this);
 			botoes[i].setActionCommand(String.format("%d", i));
-			horarios.add(new JLabel(String.format("%s-%s", filme.salas[i].inicio, filme.salas[i].fim)));
+			botoes[i].setBackground(new Color(43, 43, 43));
+			botoes[i].setForeground(new Color(169, 183, 198));
+			botoes[i].setBorder(null);
 		}
 		jp.add(horarios);
 		

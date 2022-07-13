@@ -212,6 +212,7 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 				if(pagamento.pago) {
 					nComprados = 0;
 					valor.setText("R$0.00");
+					this.dispose();
 				}
 			}
 		}
