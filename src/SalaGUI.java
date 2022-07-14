@@ -23,9 +23,15 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 		
 		//Cria a interface
 		JPanel jp = (JPanel) getContentPane();
-		jp.setLayout(new FlowLayout());
+		jp.setLayout(new BorderLayout());
 		JPanel janela = new JPanel();
 		janela.setBackground(new Color(43, 43, 43));
+		
+		//Instrui o usuário a como utilizar o programa
+		JLabel instrucoes = new JLabel("Selecione os assentos que deseja comprar");
+		instrucoes.setForeground(new Color(169, 183, 198));
+		instrucoes.setFont(new Font("Arial", Font.BOLD, 16));
+		jp.add(instrucoes, BorderLayout.NORTH);
 		
 		//Cria barras de rolagem, caso a sala seja maior do que cabe no frame
 		JScrollPane rolar = new JScrollPane(janela);
@@ -46,7 +52,7 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 		});
 		rolar.setBorder(null);
 		rolar.setBorder(null);
-		jp.add(rolar);
+		jp.add(rolar, BorderLayout.CENTER);
 		
 		//===========================Adiciona os assentos================================
 		//---------Inicializa o grid onde serão colocados os assentos---------

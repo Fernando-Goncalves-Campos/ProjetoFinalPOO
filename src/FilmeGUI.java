@@ -16,7 +16,13 @@ public class FilmeGUI extends JFrame implements ActionListener {
 		
 		//Cria a interface
 		JPanel jp = (JPanel) getContentPane();
-		jp.setLayout(new FlowLayout());
+		jp.setLayout(new BorderLayout());
+		
+		//Instrui o usuário a como utilizar o programa
+		JLabel instrucoes = new JLabel("Clique nos horários para comprar os ingressos para o filme");
+		instrucoes.setForeground(new Color(169, 183, 198));
+		instrucoes.setFont(new Font("Arial", Font.BOLD, 16));
+		jp.add(instrucoes, BorderLayout.NORTH);
 		
 		//Inicialiaza os paineis onde serão colocados os dados
 		JPanel opcoes = new JPanel(new GridLayout(nFilmes, 1));
@@ -26,7 +32,7 @@ public class FilmeGUI extends JFrame implements ActionListener {
 		
 		//Possibilita a seleção dos filmes caso eles não caibam na tela
 		JScrollPane rolar = new JScrollPane(info);
-		rolar.setPreferredSize(new Dimension(1538,798));
+		rolar.setPreferredSize(new Dimension(1538,799));
 		rolar.getHorizontalScrollBar().setBackground(new Color(43, 43, 43));
 		rolar.getVerticalScrollBar().setBackground(new Color(43, 43, 43));
 		rolar.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
@@ -42,7 +48,7 @@ public class FilmeGUI extends JFrame implements ActionListener {
 		    }
 		});
 		rolar.setBorder(null);
-		jp.add(rolar);
+		jp.add(rolar, BorderLayout.CENTER);
 		
 		//Adiciona os filmes
 		for(int i = 0; i < nFilmes; ++i) {
