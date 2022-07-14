@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 
 public class FilmeGUI extends JFrame implements ActionListener {
 	int nFilmes;
@@ -17,13 +18,29 @@ public class FilmeGUI extends JFrame implements ActionListener {
 		JPanel jp = (JPanel) getContentPane();
 		jp.setLayout(new FlowLayout());
 		
-		//Possibilita a seleção dos filmes caso eles não caibam na tela
+		//Inicialiaza os paineis onde serão colocados os dados
 		JPanel opcoes = new JPanel(new GridLayout(nFilmes, 1));
 		JPanel info = new JPanel(new FlowLayout());
 		info.setBackground(new Color(43, 43, 43));
 		info.add(opcoes);
+		
+		//Possibilita a seleção dos filmes caso eles não caibam na tela
 		JScrollPane rolar = new JScrollPane(info);
 		rolar.setPreferredSize(new Dimension(1538,798));
+		rolar.getHorizontalScrollBar().setBackground(new Color(43, 43, 43));
+		rolar.getVerticalScrollBar().setBackground(new Color(43, 43, 43));
+		rolar.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+		    @Override
+		    protected void configureScrollBarColors() {
+		    	this.thumbColor = new Color(166, 166, 166);
+		    }
+		});
+		rolar.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+		    @Override
+		    protected void configureScrollBarColors() {
+		        this.thumbColor = new Color(166, 166, 166);
+		    }
+		});
 		rolar.setBorder(null);
 		jp.add(rolar);
 		
@@ -58,11 +75,15 @@ public class FilmeGUI extends JFrame implements ActionListener {
 			//Adiciona a sala e o preco
 			JPanel valor = new JPanel(new GridLayout(2, 1));
 			valor.setBackground(new Color(43, 43, 43));
+			
+			//Adiciona a sala
 			JLabel sala = new JLabel(String.format("Sala %d", filmes[i].numeroDaSala));
-			JLabel preco = new JLabel(String.format("R$%.2f", filmes[i].preco));
 			sala.setForeground(new Color(169, 183, 198));
-			preco.setForeground(new Color(169, 183, 198));
 			valor.add(sala);
+			
+			//Adiciona o preco
+			JLabel preco = new JLabel(String.format("R$%.2f", filmes[i].preco));
+			preco.setForeground(new Color(169, 183, 198));
 			valor.add(preco);
 			sessoes.add(valor);
 			
@@ -88,7 +109,6 @@ public class FilmeGUI extends JFrame implements ActionListener {
 			opcao.add(dados);
 			opcoes.add(opcao);
 		}
-		
 	}
 	
 	//Executa as ações dos botões

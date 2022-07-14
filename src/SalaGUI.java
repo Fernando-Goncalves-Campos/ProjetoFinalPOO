@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 
 public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 	//Salva os assentos selecionados
@@ -23,12 +24,27 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 		//Cria a interface
 		JPanel jp = (JPanel) getContentPane();
 		jp.setLayout(new FlowLayout());
-		
-		//Cria barras de rolagem, caso a sala seja maior do que cabe no frame
 		JPanel janela = new JPanel();
 		janela.setBackground(new Color(43, 43, 43));
+		
+		//Cria barras de rolagem, caso a sala seja maior do que cabe no frame
 		JScrollPane rolar = new JScrollPane(janela);
 		rolar.setPreferredSize(new Dimension(1538,798));
+		rolar.getHorizontalScrollBar().setBackground(new Color(43, 43, 43));
+		rolar.getVerticalScrollBar().setBackground(new Color(43, 43, 43));
+		rolar.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+		    @Override
+		    protected void configureScrollBarColors() {
+		    	this.thumbColor = new Color(166, 166, 166);
+		    }
+		});
+		rolar.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+		    @Override
+		    protected void configureScrollBarColors() {
+		        this.thumbColor = new Color(166, 166, 166);
+		    }
+		});
+		rolar.setBorder(null);
 		rolar.setBorder(null);
 		jp.add(rolar);
 		
@@ -210,6 +226,7 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 						int linha = comprados[i]/sala.largura;
 						int fileira = comprados[i]%sala.largura;
 						
+						//Desabilita a caixa de checagem
 						opcoes[linha][fileira].removeItemListener(this);
 						opcoes[linha][fileira].setSelected(false);
 						opcoes[linha][fileira].setEnabled(false);
