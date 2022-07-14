@@ -37,6 +37,12 @@ public class CompraGUI extends JDialog implements ActionListener{
 		formas.add(new JLabel("Não há formas de pagamento disponíveis, mas você pode imaginar que elas existem"));
 		jp.add(formas);
 		
+		//Possibilita a leitura dos dados caso muitos ingressos sejam selecionados
+		JPanel info = new JPanel(new FlowLayout());
+		JScrollPane rolar = new JScrollPane(info);
+		rolar.setPreferredSize(new Dimension(170, 157));
+		rolar.setBorder(null);
+		
 		//===========================Adiciona os dados dos ingressos===========================
 		//---------Inicializa o grid---------
 		JPanel dados = new JPanel(new GridLayout(5, 1));
@@ -56,26 +62,13 @@ public class CompraGUI extends JDialog implements ActionListener{
 		dados.add(new JLabel(String.format("R$%.2f", nComprados * sala.preco)));
 		
 		//---------Adiciona os dados no painel---------
-		jp.add(dados);
+		
+		info.add(dados);
+		jp.add(rolar);
 		
 		//===========================Adiciona os botões================================
 		//Inicializa o painel onde os botões serão colocados
 		this.getContentPane().setLayout(new FlowLayout());
-		
-		//---------Adiciona o botão de compra---------
-		//Inicializa o botão
-		JButton botaoComprar = new JButton("Comprar");
-		botaoComprar.addActionListener(this);
-		botaoComprar.setActionCommand("confirma");
-		
-		//Altera a aparência
-		botaoComprar.setFont(new Font("Arial", Font.BOLD, 18));
-		botaoComprar.setBorder(null); 
-		botaoComprar.setBackground(new Color(43, 43 ,43));
-		botaoComprar.setForeground(new Color(169, 183, 198));
-		
-		//Adiciona o botão
-		this.add(botaoComprar);
 		
 		//---------Adiciona o botão de retorno---------
 		//Inicializa o botão
@@ -91,6 +84,21 @@ public class CompraGUI extends JDialog implements ActionListener{
 		
 		//Adiciona o botão
 		this.add(botaoRet);
+		
+		//---------Adiciona o botão de compra---------
+		//Inicializa o botão
+		JButton botaoComprar = new JButton("Comprar");
+		botaoComprar.addActionListener(this);
+		botaoComprar.setActionCommand("confirma");
+		
+		//Altera a aparência
+		botaoComprar.setFont(new Font("Arial", Font.BOLD, 18));
+		botaoComprar.setBorder(null); 
+		botaoComprar.setBackground(new Color(43, 43 ,43));
+		botaoComprar.setForeground(new Color(169, 183, 198));
+		
+		//Adiciona o botão
+		this.add(botaoComprar);
 	}
 	
 	//Executa as ações dos botões e caixas de checagem

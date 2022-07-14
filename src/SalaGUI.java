@@ -24,8 +24,17 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 		JPanel jp = (JPanel) getContentPane();
 		jp.setLayout(new FlowLayout());
 		
+		//Cria barras de rolagem, caso a sala seja maior do que cabe no frame
+		JPanel janela = new JPanel();
+		janela.setBackground(new Color(43, 43, 43));
+		JScrollPane rolar = new JScrollPane(janela);
+		rolar.setPreferredSize(new Dimension(1538,798));
+		rolar.setBorder(null);
+		jp.add(rolar);
+		
 		//===========================Adiciona os assentos================================
 		//---------Inicializa o grid onde serão colocados os assentos---------
+		
 		JPanel assentos = new JPanel();
 		assentos.setLayout(new GridLayout(sala.profundidade + 1, sala.largura + 1 + sala.nCorredores));
 		assentos.setBackground(new Color(43, 43, 43));
@@ -113,7 +122,7 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 		}
 		
 		//---------Adiciona os assentos no frame---------
-		jp.add(assentos);
+		janela.add(assentos);
 		
 		
 		//===========================Adiciona o preço dos ingressos===========================
@@ -123,21 +132,6 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 		//===========================Adiciona os botões================================
 		//Inicializa o painel onde os botões serão colocados
 		JPanel botoes = new JPanel(new GridLayout(1,2));
-		
-		//---------Adiciona o botão de compra---------
-		//Inicializa o botão
-		JButton botaoComprar = new JButton("Comprar");
-		botaoComprar.addActionListener(this);
-		botaoComprar.setActionCommand("confirma");
-		
-		//Altera a aparência
-		botaoComprar.setFont(new Font("Arial", Font.BOLD, 18));
-		botaoComprar.setBorder(null); 
-		botaoComprar.setBackground(new Color(43, 43 ,43));
-		botaoComprar.setForeground(new Color(169, 183, 198));
-		
-		//Adiciona o botão
-		botoes.add(botaoComprar);
 		
 		//---------Adiciona o botão de retorno---------
 		//Inicializa o botão
@@ -154,9 +148,24 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 		//Adiciona o botão
 		botoes.add(botaoRet);
 		
+		//---------Adiciona o botão de compra---------
+		//Inicializa o botão
+		JButton botaoComprar = new JButton("Comprar");
+		botaoComprar.addActionListener(this);
+		botaoComprar.setActionCommand("confirma");
+		
+		//Altera a aparência
+		botaoComprar.setFont(new Font("Arial", Font.BOLD, 18));
+		botaoComprar.setBorder(null); 
+		botaoComprar.setBackground(new Color(43, 43 ,43));
+		botaoComprar.setForeground(new Color(169, 183, 198));
+		
+		//Adiciona o botão
+		botoes.add(botaoComprar);
+		
 		//---------Adiciona os botões no frame---------
 		dados.add(botoes);
-		jp.add(dados);
+		janela.add(dados);
 	}
 	
 	//Executa as ações das caixas de checagem
@@ -229,7 +238,7 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 		Sala sala = new Sala();
 		sala.criaCorredores(3, new int[] {6, 6, 6});
 		SalaGUI frame = new SalaGUI(sala);
-		frame.setSize(1920,1080);
+		frame.setSize(1550,830);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setBackground(new Color(43, 43, 43));
 		frame.setVisible(true);
