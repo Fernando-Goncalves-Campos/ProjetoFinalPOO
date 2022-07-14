@@ -40,7 +40,7 @@ public class CompraGUI extends JDialog implements ActionListener{
 		//Possibilita a leitura dos dados caso muitos ingressos sejam selecionados
 		JPanel info = new JPanel(new FlowLayout());
 		JScrollPane rolar = new JScrollPane(info);
-		rolar.setPreferredSize(new Dimension(170, 157));
+		rolar.setPreferredSize(new Dimension(155, 107));
 		rolar.setBorder(null);
 		
 		//===========================Adiciona os dados dos ingressos===========================
@@ -51,12 +51,11 @@ public class CompraGUI extends JDialog implements ActionListener{
 		dados.add(new JLabel(String.format("Horário: %s-%s", sala.inicio, sala.fim)));
 		
 		//---------Adiciona os assentos---------
-		JPanel ingressos = new JPanel(new FlowLayout());
-		ingressos.add(new JLabel("Assentos:"));
+		String ingressos = "Assentos:";
 		for(int i = 0; i < nComprados; ++i) {
-			ingressos.add(new JLabel(String.format(" %d%c", (comprados[i]/sala.largura)+1, (char)(65 + (comprados[i]%sala.largura)))));
+			ingressos += String.format(" %d%c", (comprados[i]/sala.largura)+1, (char)(65 + (comprados[i]%sala.largura)));
 		}
-		dados.add(ingressos);
+		dados.add(new JLabel(ingressos));
 		
 		//---------Adiciona o preco---------
 		dados.add(new JLabel(String.format("R$%.2f", nComprados * sala.preco)));

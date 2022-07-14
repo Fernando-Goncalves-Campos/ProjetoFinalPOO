@@ -27,18 +27,44 @@ public class FilmeGUI extends JFrame implements ActionListener {
 		rolar.setBorder(null);
 		jp.add(rolar);
 		
+		//Adiciona os filmes
 		for(int i = 0; i < nFilmes; ++i) {
-			//Inicializa o painel do filme
-			JPanel opcao = new JPanel(new FlowLayout());
+			//Inicializa o painel do filme alinhado à esquerda
+			JPanel opcao = new JPanel();
+			opcao.setLayout(new BoxLayout(opcao, BoxLayout.X_AXIS));
+			opcao.setAlignmentX(LEFT_ALIGNMENT);
+			opcao.setBackground(new Color(43, 43, 43));
+			opcao.setPreferredSize(new Dimension(300, 250));
+			
+			//Adiciona a imagem
+			JLabel imagem = new JLabel();
+			imagem.setIcon(new ImageIcon(filmes[i].imagem));
+			opcao.add(imagem);
+			
+			//Adiciona os dados do filme
+			JPanel dados = new JPanel(new GridLayout(2, 1));
+			dados.setBackground(new Color(43, 43, 43));
 			
 			//Adiciona o nome do filme
 			JLabel nome = new JLabel(filmes[i].nomeDoFilme);
 			nome.setForeground(new Color(169, 183, 198));
-			nome.setBackground(new Color(43,43,43));
-			opcao.add(nome);
+			nome.setFont(new Font("Arial", Font.BOLD, 20));
+			dados.add(nome);
+			
+			//Adiciona as sessões do filme
+			JPanel sessoes = new JPanel(new GridLayout(1, 2));
+			sessoes.setBackground(new Color(43, 43, 43));
+			
+			//Adiciona a sala e o preco
+			JPanel valor = new JPanel(new GridLayout(2, 1));
+			valor.setBackground(new Color(43, 43, 43));
+			JLabel sala = new JLabel(String.format("Sala %d", filmes[i].numeroDaSala));
 			JLabel preco = new JLabel(String.format("R$%.2f", filmes[i].preco));
+			sala.setForeground(new Color(169, 183, 198));
 			preco.setForeground(new Color(169, 183, 198));
-			opcao.add(preco);
+			valor.add(sala);
+			valor.add(preco);
+			sessoes.add(valor);
 			
 			//Inicializa o grid para posicionar os botões
 			JPanel horarios = new JPanel();
@@ -57,7 +83,9 @@ public class FilmeGUI extends JFrame implements ActionListener {
 				botoes[i][j].setForeground(new Color(169, 183, 198));
 				botoes[i][j].setBorder(null);
 			}
-			opcao.add(horarios);
+			sessoes.add(horarios);
+			dados.add(sessoes);
+			opcao.add(dados);
 			opcoes.add(opcao);
 		}
 		
@@ -67,24 +95,25 @@ public class FilmeGUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		for(int i = 0; i < nFilmes; ++i) {
 			for(int j = 0; j < filmes[i].nSalas; ++j) {
-			String mensagem = String.format("%d-%d", i, j);
-			if(mensagem.equals(e.getActionCommand())) {
-				SalaGUI frame = new SalaGUI(filmes[i].salas[j]);
-				frame.setSize(1550,830);
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				frame.getContentPane().setBackground(new Color(43, 43, 43));
-				frame.setVisible(true);
-				break;
+				String mensagem = String.format("%d-%d", i, j);
+				if(mensagem.equals(e.getActionCommand())) {
+					SalaGUI frame = new SalaGUI(filmes[i].salas[j]);
+					frame.setSize(1550,830);
+					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					frame.getContentPane().setBackground(new Color(43, 43, 43));
+					frame.setVisible(true);
+					break;
+				}
 			}
 		}
-		}
-		
 	}
 	
 	public static void main(String[] args) {
-		Filme filme1 = new Filme("Teste1");
-		Filme filme2 = new Filme("Teste2");
-		FilmeGUI frame = new FilmeGUI(2, new Filme[] {filme1, filme2});
+		Filme filme1 = new Filme("PosterVingadores.png", "Vingadores");
+		Filme filme2 = new Filme("PosterMatrix.png", "Matrix");
+		Filme filme3 = new Filme("PosterMiranha.png", "Homem-Aranha");
+		Filme filme4 = new Filme("PosterThor.png", "Thor");
+		FilmeGUI frame = new FilmeGUI(4, new Filme[] {filme1, filme2, filme3, filme4});
 		frame.setSize(1920,1080);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setBackground(new Color(43, 43, 43));
