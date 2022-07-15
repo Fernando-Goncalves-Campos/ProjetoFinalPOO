@@ -35,6 +35,7 @@ public class FilmeGUI extends JFrame implements ActionListener {
 		rolar.setPreferredSize(new Dimension(1538,799));
 		rolar.getHorizontalScrollBar().setBackground(new Color(43, 43, 43));
 		rolar.getVerticalScrollBar().setBackground(new Color(43, 43, 43));
+		rolar.getVerticalScrollBar().setUnitIncrement(20);
 		rolar.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
 		    @Override
 		    protected void configureScrollBarColors() {
