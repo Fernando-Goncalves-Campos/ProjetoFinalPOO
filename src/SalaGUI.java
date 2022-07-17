@@ -4,6 +4,13 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
 public class SalaGUI extends JFrame implements ActionListener, ItemListener{
+	//Constantes
+	static Color backGroundColor = new Color(51, 51, 51);
+	static Color centerColor = new Color(37, 37, 37);
+	static Color textColor = new Color(56, 152, 255);
+	static Color textColor2 = new Color(240, 240, 240);
+	static Color buttonTextColor = new Color(80, 180, 255);
+	
 	//Salva os assentos selecionados
 	private JCheckBox[][] opcoes;
 	private JLabel valor = new JLabel("R$0.00");
@@ -25,19 +32,19 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 		JPanel jp = (JPanel) getContentPane();
 		jp.setLayout(new BorderLayout());
 		JPanel janela = new JPanel();
-		janela.setBackground(new Color(43, 43, 43));
+		janela.setBackground(backGroundColor);
 		
-		//Instrui o usuário a como utilizar o programa
-		JLabel instrucoes = new JLabel("Selecione os assentos que deseja comprar");
-		instrucoes.setForeground(new Color(169, 183, 198));
-		instrucoes.setFont(new Font("Arial", Font.BOLD, 16));
+		//Coloca o titulo
+		JLabel instrucoes = new JLabel("CINEUSP");
+		instrucoes.setForeground(new Color(30, 130, 255, 200));
+		instrucoes.setFont(new Font("Arial", Font.BOLD, 40));
+		instrucoes.setHorizontalAlignment(JTextField.CENTER);
 		jp.add(instrucoes, BorderLayout.NORTH);
-		
+	
 		//Cria barras de rolagem, caso a sala seja maior do que cabe no frame
 		JScrollPane rolar = new JScrollPane(janela);
-		rolar.setPreferredSize(new Dimension(1538,798));
-		rolar.getHorizontalScrollBar().setBackground(new Color(43, 43, 43));
-		rolar.getVerticalScrollBar().setBackground(new Color(43, 43, 43));
+		rolar.setPreferredSize(new Dimension(1538,799));
+		rolar.getVerticalScrollBar().setBackground(backGroundColor);
 		rolar.getVerticalScrollBar().setUnitIncrement(20);
 		rolar.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
 		    @Override
@@ -46,6 +53,20 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 		    }
 		});
 		rolar.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+		    @Override
+		    protected void configureScrollBarColors() {
+		        this.thumbColor = new Color(166, 166, 166);
+		    }
+		});
+		rolar.getHorizontalScrollBar().setBackground(backGroundColor);
+		rolar.getHorizontalScrollBar().setUnitIncrement(20);
+		rolar.getHorizontalScrollBar().setUI(new BasicScrollBarUI() {
+		    @Override
+		    protected void configureScrollBarColors() {
+		    	this.thumbColor = new Color(166, 166, 166);
+		    }
+		});
+		rolar.getHorizontalScrollBar().setUI(new BasicScrollBarUI() {
 		    @Override
 		    protected void configureScrollBarColors() {
 		        this.thumbColor = new Color(166, 166, 166);
@@ -60,7 +81,7 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 		
 		JPanel assentos = new JPanel();
 		assentos.setLayout(new GridLayout(sala.profundidade + 1, sala.largura + 1 + sala.nCorredores));
-		assentos.setBackground(new Color(43, 43, 43));
+		assentos.setBackground(backGroundColor);
 		
 		//---------Adiciona a linha de coordenadas superior---------
 		assentos.add(new JLabel(" "));
@@ -148,13 +169,11 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 		janela.add(assentos);
 		
 		
-		//===========================Adiciona o preço dos ingressos===========================
-		JPanel dados = new JPanel(new GridLayout(2,1));
-		dados.add(valor);
+		//===========================Adiciona o preço e os botoes===========================
+		JPanel dados = new JPanel(new FlowLayout());
 		
-		//===========================Adiciona os botões================================
-		//Inicializa o painel onde os botões serão colocados
-		JPanel botoes = new JPanel(new GridLayout(1,2));
+		dados.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		dados.setBackground(new Color(43, 43, 43));
 		
 		//---------Adiciona o botão de retorno---------
 		//Inicializa o botão
@@ -164,12 +183,20 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 				
 		//Altera a aparência
 		botaoRet.setFont(new Font("Arial", Font.BOLD, 18));
-		botaoRet.setBorder(null); 
-		botaoRet.setBackground(new Color(43, 43 ,43));
-		botaoRet.setForeground(new Color(169, 183, 198));
+		botaoRet.setBackground(textColor);
+		botaoRet.setForeground(textColor2);
 		
 		//Adiciona o botão
-		botoes.add(botaoRet);
+		dados.add(botaoRet);
+		
+		//Adiciona o valor
+		valor.setHorizontalAlignment(JTextField.CENTER);
+		valor.setBorder(BorderFactory.createEmptyBorder(10, 100, 10, 100));
+		valor.setBackground(textColor2);
+		valor.setForeground(new Color(43, 43, 43));
+		
+		valor.setOpaque(true);
+		dados.add(valor);
 		
 		//---------Adiciona o botão de compra---------
 		//Inicializa o botão
@@ -179,16 +206,15 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 		
 		//Altera a aparência
 		botaoComprar.setFont(new Font("Arial", Font.BOLD, 18));
-		botaoComprar.setBorder(null); 
-		botaoComprar.setBackground(new Color(43, 43 ,43));
-		botaoComprar.setForeground(new Color(169, 183, 198));
+		botaoComprar.setBackground(textColor);
+		botaoComprar.setForeground(textColor2);
+
 		
 		//Adiciona o botão
-		botoes.add(botaoComprar);
+		dados.add(botaoComprar);
 		
 		//---------Adiciona os botões no frame---------
-		dados.add(botoes);
-		janela.add(dados);
+		jp.add(dados, BorderLayout.SOUTH);
 	}
 	
 	//Executa as ações das caixas de checagem
@@ -223,7 +249,8 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 				//Inicializa a aba de pagamento
 				CompraGUI pagamento = new CompraGUI(this, sala, nComprados, comprados);
 				pagamento.getContentPane().setBackground(new Color(43, 43, 43));
-				pagamento.setSize(750, 500);
+				pagamento.setResizable(false);
+				pagamento.setSize(500, 400);
 				pagamento.setVisible(true);
 				pagamento.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				

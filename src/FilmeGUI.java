@@ -132,7 +132,7 @@ public class FilmeGUI extends JFrame implements ActionListener {
 				String mensagem = String.format("%d-%d", i, j);
 				if(mensagem.equals(e.getActionCommand())) {
 					SalaGUI frame = new SalaGUI(filmes[i].salas[j]);
-					frame.setSize(1550,830);
+					frame.setSize(1550,900);
 					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 					frame.getContentPane().setBackground(new Color(43, 43, 43));
 					frame.setVisible(true);
