@@ -147,8 +147,8 @@ public class FilmeGUI extends JFrame implements ActionListener {
 		Filme filme2 = new Filme("PosterMatrix.png", "Matrix");
 		Filme filme3 = new Filme("PosterMiranha.png", "Homem-Aranha");
 		Filme filme4 = new Filme("PosterThor.png", "Thor");
-		Filme filme5 = new Filme("PosterThor.png", "Thor");
-		Filme filme6 = new Filme("PosterThor.png", "Thor");
+		Filme filme5 = new Filme("PosterDoutor.png", "Doutor Estranho");
+		Filme filme6 = new Filme("PosterCapitain.png", "Capitain Marvel");
 		FilmeGUI frame = new FilmeGUI(6, new Filme[] {filme1, filme2, filme3, filme4, filme5, filme6});
 		frame.setSize(1920,1080);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
