@@ -52,12 +52,6 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 		    	this.thumbColor = new Color(166, 166, 166);
 		    }
 		});
-		rolar.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
-		    @Override
-		    protected void configureScrollBarColors() {
-		        this.thumbColor = new Color(166, 166, 166);
-		    }
-		});
 		rolar.getHorizontalScrollBar().setBackground(backGroundColor);
 		rolar.getHorizontalScrollBar().setUnitIncrement(20);
 		rolar.getHorizontalScrollBar().setUI(new BasicScrollBarUI() {
@@ -66,13 +60,6 @@ public class SalaGUI extends JFrame implements ActionListener, ItemListener{
 		    	this.thumbColor = new Color(166, 166, 166);
 		    }
 		});
-		rolar.getHorizontalScrollBar().setUI(new BasicScrollBarUI() {
-		    @Override
-		    protected void configureScrollBarColors() {
-		        this.thumbColor = new Color(166, 166, 166);
-		    }
-		});
-		rolar.setBorder(null);
 		rolar.setBorder(null);
 		jp.add(rolar, BorderLayout.CENTER);
 		

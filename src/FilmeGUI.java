@@ -52,7 +52,7 @@ public class FilmeGUI extends JFrame implements ActionListener {
 		    	this.thumbColor = new Color(166, 166, 166);
 		    }
 		});
-		rolar.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+		rolar.getHorizontalScrollBar().setUI(new BasicScrollBarUI() {
 		    @Override
 		    protected void configureScrollBarColors() {
 		        this.thumbColor = new Color(166, 166, 166);
@@ -135,6 +135,7 @@ public class FilmeGUI extends JFrame implements ActionListener {
 					frame.setSize(1550,900);
 					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 					frame.getContentPane().setBackground(new Color(43, 43, 43));
+					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					frame.setVisible(true);
 					break;
 				}
@@ -153,6 +154,7 @@ public class FilmeGUI extends JFrame implements ActionListener {
 		frame.setSize(1920,1080);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setBackground(new Color(43, 43, 43));
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setVisible(true);
 	}
 

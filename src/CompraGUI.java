@@ -51,11 +51,6 @@ public class CompraGUI extends JDialog implements ActionListener{
 		info.setBackground(backGroundColor);
 		info.setBorder(BorderFactory.createEmptyBorder(30, 30, 0, 0));
 		
-		JScrollPane rolar = new JScrollPane(info);
-		rolar.setPreferredSize(new Dimension(155, 107));
-		rolar.setBorder(null);
-
-		
 		//===========================Adiciona os dados dos ingressos===========================
 		//---------Inicializa o grid---------
 		JPanel dados = new JPanel(new GridLayout(5, 1));
@@ -68,7 +63,7 @@ public class CompraGUI extends JDialog implements ActionListener{
 		filmeLabel.setFont(new Font("Arial", Font.BOLD, tamFonte));
 		JLabel salaLabel = new JLabel(String.format("Sala: %d", sala.numeroDaSala));
 		salaLabel.setFont(new Font("Arial", Font.BOLD, tamFonte));
-		JLabel horarioLabel = new JLabel(String.format("Hor�rio: %s-%s", sala.inicio, sala.fim));
+		JLabel horarioLabel = new JLabel(String.format("Hor�rio: %s-%s", sala.inicio, sala.fim));
 		horarioLabel.setFont(new Font("Arial", Font.BOLD, tamFonte));
 		
 		dados.add(filmeLabel);
@@ -93,7 +88,7 @@ public class CompraGUI extends JDialog implements ActionListener{
 		//---------Adiciona os dados no painel---------
 		
 		info.add(dados);
-		jp.add(rolar);
+		jp.add(info);
 		
 		//===========================Adiciona os botões================================
 		//Inicializa o painel onde os botões serão colocados
